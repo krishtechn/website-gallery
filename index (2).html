@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <title>Filter gallery website</title>
+</head>
+
+<style>
+      *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+      }
+
+      body{
+            height: 100vh;
+            width:100%;
+            text-align: center;
+            background-color: rgba(0, 0, 255, 0.13);
+      }
+      .container{
+            width:100%;
+            height: 100vh;
+      }
+      .btn{
+            padding-top: 30px;
+            padding-bottom: 20px;
+      }
+      .btn button{
+            padding:0.3rem 1rem;
+            outline: none;
+            border-radius: 30px;
+            text-transform: capitalize;
+            cursor: pointer;
+            margin: 10px;
+            background-color: transparent;
+            border: 2px solid #000;
+            transition: 2s ease;
+            font-weight: bold;
+            font-size: 20px;
+      }
+      .btn button:hover{
+            background-color: #fff;
+      }
+      .images{
+            width: 100%;
+            margin:0 auto;
+      }
+      .images img{
+            margin-top: 30px;
+            border-radius: 5px;
+            width:300px;
+            height: 40vh;
+            margin: 10px;
+            filter: grayscale(0);
+            transition: 0.4s ease;
+            box-shadow: 0 2px 2px #000;
+      }
+      .images img:hover{
+            transform: scale(1.02);
+            filter: grayscale(1);
+      }
+</style>
+
+<body>
+      <div class="container">
+            <div class="btn">
+                  <button class="filter-btn" data-id = "all">all</button>
+                  <button class="filter-btn" data-id = "camera">camera</button>
+                  <button class="filter-btn" data-id = "headphone">headphone</button>
+                  <button class="filter-btn" data-id = "mobile">mobile</button>
+                  <button class="filter-btn" data-id = "shoe">shoe</button>
+            </div>
+
+            <div class="images">
+
+            </div>
+      </div>
+</body>
+
+<script>
+
+const menu = [
+{
+      category : 'mobile',
+      img : `./image/mobile1.jpg`,
+}
+,{
+      category : 'mobile',
+      img : './image/mobile2.jpg',
+}
+,{
+      category : 'mobile',
+      img : './image/mobile3.jpg',
+}
+,{
+      category : 'mobile',
+      img : './image/mobile4.jpg',
+}
+,{
+      category : 'mobile',
+      img : './image/mobile5.jpg',
+}
+,{
+      category : 'shoe',
+      img : './image/shoe1.jpg',
+}
+,{
+      category : 'shoe',
+      img : './image/shoe2.jpg',
+}
+,{
+      category : 'shoe',
+      img : './image/shoe3.jpg',
+}
+,{
+      category : 'shoe',
+      img : './image/shoe4.jpg',
+}
+,{
+      category : 'headphone',
+      img : './image/headphone1.jpg',
+}
+,{
+      category : 'headphone',
+      img : './image/headphone2.jpg',
+}
+,{
+      category : 'headphone',
+      img : './image/headphone3.jpg',
+}
+,{
+      category : 'headphone',
+      img : './image/headphone4.jpg',
+}
+,{
+      category : 'watch',
+      img : './image/watch1.jpg',
+}
+,{
+      category : 'watch',
+      img : './image/watch2.jpg',
+}
+,{
+      category : 'watch',
+      img : './image/watch3.jpg',
+}
+,{
+      category : 'watch',
+      img : './image/watch4.jpg',
+}
+,{
+      category : 'camera',
+      img : './image/camera1.jpg',
+}
+,{
+      category : 'camera',
+      img : './image/camera2.jpg',
+}
+,{
+      category : 'camera',
+      img : './image/camera3.jpg',
+}
+];
+const container = document.querySelector('.images');
+const filterbtn = document.querySelectorAll('.filter-btn');
+
+window.addEventListener('DOMContentLoaded',function(){
+  loaddata(menu);
+})
+
+function loaddata(card){
+      const displayitem = card.map(function(item){
+        return `<img src="${item.img}" data-aos="flip-left" alt="">
+`;
+  })    
+  const displaymenu = displayitem.join(',');
+  container.innerHTML = displaymenu;
+}
+
+
+filterbtn.forEach(function(btn){
+      btn.addEventListener('click',function(itembtn){
+            const category = itembtn.currentTarget.dataset.id;
+            const filtermenu = menu.filter(function(menucategory){
+                  // console.log(menucategory.category);
+                  // console.log(category);
+
+                  if(menucategory.category === category){
+                        return menu;
+                  }
+            })
+
+            if(category === 'all'){
+                  loaddata(menu);
+            }else{
+                  loaddata(filtermenu);
+            }
+      })
+})
+
+
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+      AOS.init();
+    </script>
+</html>
